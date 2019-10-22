@@ -25,6 +25,28 @@ class threeDVec {
     float vals_[3];
 };
 
+class VecThreeD {
+    public:
+    float x() {
+        return vals_[0];
+    }
+    
+    float y() {
+        return vals_[1];
+    }
+    
+    float z() {
+        return vals_[2];
+    }
+    
+    VecThreeD() = default;
+    
+    VecThreeD(float x, float y, float z) : vals_{x,y,z} {};
+    
+    private:
+    float vals_[3];
+};
+
 
 static_assert(Has_Xaxis<threeDVec>::value, "threeDVec"); 
 static_assert(Has_MFunc_getX<threeDVec, float(void)>::value, "threeDVec");
@@ -97,6 +119,7 @@ class VectorOps {
 
 int main()
 {
+    // A vector of type `threeDVec`
     threeDVec v{1,2,3};
     std::cout<<"v.x = "<<VectorOps::getX(v)<<"\n";
     std::cout<<"v.y = "<<VectorOps::getY(v)<<"\n";
@@ -107,5 +130,18 @@ int main()
     std::cout<<"v_normalized.x = "<<VectorOps::getX(v_normalized)<<"\n";
     std::cout<<"v_normalized.y = "<<VectorOps::getY(v_normalized)<<"\n";
     std::cout<<"v_normalized.z = "<<VectorOps::getZ(v_normalized)<<"\n";
+    
+    // A vector of different type `VecThreeD`
+
+    VecThreeD v1{1,2,3};
+    std::cout<<"v1.x = "<<VectorOps::getX(v1)<<"\n";
+    std::cout<<"v1.y = "<<VectorOps::getY(v1)<<"\n";
+    std::cout<<"v1.z = "<<VectorOps::getZ(v1)<<"\n";
+    
+    VecThreeD v1_normalized = VectorOps::getNormalized(v1);
+    
+    std::cout<<"v1_normalized.x = "<<VectorOps::getX(v1_normalized)<<"\n";
+    std::cout<<"v1_normalized.y = "<<VectorOps::getY(v1_normalized)<<"\n";
+    std::cout<<"v1_normalized.z = "<<VectorOps::getZ(v1_normalized)<<"\n";
     return 0;
 }
